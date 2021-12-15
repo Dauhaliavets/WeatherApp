@@ -4,7 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="styles/index.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/index.css" />
 		<title>Weather App</title>
 	</head>
 	<body>
@@ -14,8 +17,8 @@
 					<input
 						class="form__search-input"
 						type="text"
-						name=""
-						id=""
+						name="city"
+						id="citySearch"
 						placeholder="Search city"
 					/>
 					<button class="form__search-button" type="submit"></button>
@@ -23,9 +26,9 @@
 
 				<div class="current__location">
 					<div class="tabs">
-						<div class="tabs__item">
-							<!-- Now -->
-							<div class="weather__temperature">14*</div>
+						<!-- <div class="tabs__item">
+							-- Now --
+							<div class="weather__temperature">14&deg</div>
 							<div class="weather__icon">
 								<img
 									src="img/icon-cloud.png"
@@ -34,7 +37,7 @@
 								/>
 							</div>
 							<div class="location__wrapper">
-								<p class="location">Aktobe</p>
+								<p class="location__name">Aktobe</p>
 								<div class="like__icon">
 									<svg
 										width="24"
@@ -54,13 +57,24 @@
 									</svg>
 								</div>
 							</div>
-						</div>
-                                                                <!-- <div class="tabs__item">
-                                                                    -- Details --
-                                                                </div>
-                                                                <div class="tabs__item">
-                                                                    -- Forecast --
-                                                                </div> -->
+						</div> -->
+						<div class="tabs__item">
+                            <!-- -- Details -- -->
+                            <p class="location__name">Aktobe</p>
+
+                            <div class="details__location">
+                                <p class="temperature">Temperature: <span>14&deg</span></p>
+                                <p class="feels__like">Feels like: <span>10&deg</span></p>
+                                <p class="weather">Weather: <span>Clouds</span></p>
+                                <p class="sunrise">Sunrise: <span>03:21</span></p>
+                                <p class="sunset">Sunset: <span>18:54</span></p>
+                            </div>
+
+                        </div>
+                        <!--
+                        <div class="tabs__item">
+                            -- Forecast --
+                        </div> -->
 					</div>
 					<ul class="tabs__control">
 						<li class="tabs__btn-wrapper">
@@ -77,24 +91,24 @@
 
 				<div class="added__locations">
 					<h3 class="locations__title">Added Locations:</h3>
-					<ul class="locations">
-						<li class="location">
-							<a href="#">Amur</a>
+					<ul class="locations__list">
+						<li class="location__item">
+							<a class="location__link" href="#">Amur</a>
 						</li>
-						<li class="location">
-							<a href="#">Samara</a>
+						<li class="location__item">
+							<a class="location__link" href="#">Samara</a>
 						</li>
-						<li class="location">
-							<a href="#">Bali</a>
+						<li class="location__item">
+							<a class="location__link" href="#">Bali</a>
 						</li>
-						<li class="location">
-							<a href="#">Dane</a>
+						<li class="location__item">
+							<a class="location__link" href="#">Dane</a>
 						</li>
-						<li class="location">
-							<a href="#">Kilo</a>
+						<li class="location__item">
+							<a class="location__link" href="#">Kilo</a>
 						</li>
-						<li class="location">
-							<a href="#">Nur-Sultan</a>
+						<li class="location__item">
+							<a class="location__link" href="#">Nur-Sultan</a>
 						</li>
 					</ul>
 				</div>
