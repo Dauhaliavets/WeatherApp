@@ -30,14 +30,14 @@
 
 				<div class="current__location">
 					<div class="tabs">
-						<div class="tabs__item" data-tab="now">
-							<!-- -- Now -- -->
-							<div class="weather__temperature">14&deg</div>
-							<div class="weather__icon">
+						<!-- Now -->
+						<div class="tabs__item active" data-tab="now">
+							<div class="now__temperature temperature"><span>14&deg</span></div>
+							<div class="now__icon">
 								<img
 									src="img/icon-cloud.png"
 									alt="cloud"
-									class="icon-weather"
+									class="icon-now"
 								/>
 							</div>
 							<div class="location__wrapper">
@@ -62,19 +62,19 @@
 								</div>
 							</div>
 						</div>
-
+						<!-- Details -->
 						<div class="tabs__item" data-tab="details">
 							<p class="location__name">Aktobe</p>
 							<div class="details__location">
-								<p class="temperature">Temperature: <span>14&deg</span></p>
-								<p class="feels__like">Feels like: <span>10&deg</span></p>
-								<p class="weather">Weather: <span>Clouds</span></p>
-								<p class="sunrise">Sunrise: <span>03:21</span></p>
-								<p class="sunset">Sunset: <span>18:54</span></p>
+								<p class="details__temperature temperature">Temperature: <span>14&deg</span></p>
+								<p class="details__feels__like feels__like">Feels like: <span>10&deg</span></p>
+								<p class="details__weather weather">Weather: <span>Clouds</span></p>
+								<p class="details__sunrise sunrise">Sunrise: <span>03:21</span></p>
+								<p class="details__sunset sunset">Sunset: <span>18:54</span></p>
 							</div>
 						</div>
-						
-                        <div class="tabs__item active" data-tab="forecast">
+						<!-- Forecaast -->
+                        <div class="tabs__item" data-tab="forecast">
 							<p class="location__name">Aktobe</p>
 							<div class="forecast__card">
 								<div class="forecast__dateTime-wrapper">
@@ -134,13 +134,13 @@
 					</div>
 					<ul class="tabs__control">
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn" data-tab="now">Now</button>
+							<button class="tabs__btn active" data-tab="now">Now</button>
 						</li>
 						<li class="tabs__btn-wrapper">
 							<button class="tabs__btn" data-tab="details">Details</button>
 						</li>
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn active" data-tab="forecast">Forecast</button>
+							<button class="tabs__btn" data-tab="forecast">Forecast</button>
 						</li>
 					</ul>
 				</div>

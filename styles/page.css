@@ -71,7 +71,7 @@ body {
     display: none;
 }
 /* ======   Now start   =========== */
-.weather__temperature { 
+.now__temperature { 
     font-style: normal;
     font-weight: normal;
     font-size: 70px;
@@ -79,13 +79,13 @@ body {
 
     margin-bottom: 40px;
 }
-.weather__icon { 
+.now__icon { 
     align-self: center;
     margin-bottom: 70px;
     width: 75px;
     height: 75px;
 }
-.icon-weather { 
+.icon-now { 
     width: 100%;
     height: 100%;
 }
