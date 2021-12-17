@@ -4,10 +4,14 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles/index.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles/index.css" />
+		<script defer src="scripts/index.js"></script>
 		<title>Weather App</title>
 	</head>
 	<body>
@@ -26,8 +30,8 @@
 
 				<div class="current__location">
 					<div class="tabs">
-						<!-- <div class="tabs__item">
-							-- Now --
+						<div class="tabs__item" data-tab="now">
+							<!-- -- Now -- -->
 							<div class="weather__temperature">14&deg</div>
 							<div class="weather__icon">
 								<img
@@ -57,34 +61,86 @@
 									</svg>
 								</div>
 							</div>
-						</div> -->
-						<div class="tabs__item">
-                            <!-- -- Details -- -->
-                            <p class="location__name">Aktobe</p>
+						</div>
 
-                            <div class="details__location">
-                                <p class="temperature">Temperature: <span>14&deg</span></p>
-                                <p class="feels__like">Feels like: <span>10&deg</span></p>
-                                <p class="weather">Weather: <span>Clouds</span></p>
-                                <p class="sunrise">Sunrise: <span>03:21</span></p>
-                                <p class="sunset">Sunset: <span>18:54</span></p>
-                            </div>
-
+						<div class="tabs__item" data-tab="details">
+							<p class="location__name">Aktobe</p>
+							<div class="details__location">
+								<p class="temperature">Temperature: <span>14&deg</span></p>
+								<p class="feels__like">Feels like: <span>10&deg</span></p>
+								<p class="weather">Weather: <span>Clouds</span></p>
+								<p class="sunrise">Sunrise: <span>03:21</span></p>
+								<p class="sunset">Sunset: <span>18:54</span></p>
+							</div>
+						</div>
+						
+                        <div class="tabs__item active" data-tab="forecast">
+							<p class="location__name">Aktobe</p>
+							<div class="forecast__card">
+								<div class="forecast__dateTime-wrapper">
+									<div class="forecast__date">17 May</div>
+									<div class="forecast__time">12:00</div>
+								</div>
+								<div class="forecast__info-wrapper">
+									<div class="forecast__info__temperature">
+										<div class="forecast__temperature">Temperature: <span>13&deg</span></div>
+										<div class="forecast__feels_like">Feels like: <span>10&deg</span></div>
+									</div>
+									<div class="forecast__info__weather">
+										<div class="forecast__main">Rain</div>
+										<div class="forecast__icon">
+											<img src="img/icon-rain.png" alt="rain">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="forecast__card">
+								<div class="forecast__dateTime-wrapper">
+									<div class="forecast__date">17 May</div>
+									<div class="forecast__time">15:00</div>
+								</div>
+								<div class="forecast__info-wrapper">
+									<div class="forecast__info__temperature">
+										<div class="forecast__temperature">Temperature: <span>13&deg</span></div>
+										<div class="forecast__feels_like">Feels like: <span>10&deg</span></div>
+									</div>
+									<div class="forecast__info__weather">
+										<div class="forecast__main">Rain</div>
+										<div class="forecast__icon">
+											<img src="img/icon-rain.png" alt="rain">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="forecast__card">
+								<div class="forecast__dateTime-wrapper">
+									<div class="forecast__date">17 May</div>
+									<div class="forecast__time">18:00</div>
+								</div>
+								<div class="forecast__info-wrapper">
+									<div class="forecast__info__temperature">
+										<div class="forecast__temperature">Temperature: <span>13&deg</span></div>
+										<div class="forecast__feels_like">Feels like: <span>10&deg</span></div>
+									</div>
+									<div class="forecast__info__weather">
+										<div class="forecast__main">Rain</div>
+										<div class="forecast__icon">
+											<img src="img/icon-rain.png" alt="rain">
+										</div>
+									</div>
+								</div>
+							</div>
                         </div>
-                        <!--
-                        <div class="tabs__item">
-                            -- Forecast --
-                        </div> -->
 					</div>
 					<ul class="tabs__control">
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn">Now</button>
+							<button class="tabs__btn" data-tab="now">Now</button>
 						</li>
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn">Details</button>
+							<button class="tabs__btn" data-tab="details">Details</button>
 						</li>
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn">Forecast</button>
+							<button class="tabs__btn active" data-tab="forecast">Forecast</button>
 						</li>
 					</ul>
 				</div>
