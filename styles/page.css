@@ -76,14 +76,11 @@ body {
     font-weight: normal;
     font-size: 70px;
     line-height: 82px;
-
-    margin-bottom: 40px;
 }
 .now__icon { 
     align-self: center;
-    margin-bottom: 70px;
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 150px;
 }
 .icon-now { 
     width: 100%;

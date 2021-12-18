@@ -113,7 +113,7 @@ function getDataForCity(city) {
 			setDataWeatherDetails(data);
 		})
 		.catch((error) => {
-			console.log(error);
+			alert(error);
 		});
 }
 
@@ -121,7 +121,7 @@ function setDataWeatherNow(data) {
 	const temp = Math.round(data.main.temp);
 	const city = data.name;
 	const iconCode = data.weather[0].icon;
-	const urlIcon = `${serverIconUrl}${iconCode}.png`;
+	const urlIcon = `${serverIconUrl}${iconCode}@4x.png`;
 
 	UI.temperature.forEach((item) => (item.textContent = `${temp}${degree}`));
 	UI.location.forEach((item) => (item.textContent = `${city}`));
