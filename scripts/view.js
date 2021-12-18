@@ -11,4 +11,10 @@ export const UI = {
 	weatherIcon: document.querySelector('.icon-now'),
 	likeIcon: document.querySelector('.like__icon'),
 	locationsList: document.querySelector('.locations__list'),
+	DETAILS: {
+		feelsLike: document.querySelector('.feels__like span'),
+		weather: document.querySelector('.weather span'),
+		sunrise: document.querySelector('.sunrise span'),
+		sunset: document.querySelector('.sunset span'),
+	},
 };

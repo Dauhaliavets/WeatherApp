@@ -62,7 +62,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 345px;
+    height: 347px;
 }
 .tabs__item.active[data-tab="forecast"] {
     overflow-y: scroll;
@@ -76,14 +76,11 @@ body {
     font-weight: normal;
     font-size: 70px;
     line-height: 82px;
-
-    margin-bottom: 40px;
 }
 .now__icon { 
     align-self: center;
-    margin-bottom: 70px;
-    width: 75px;
-    height: 75px;
+    width: 150px;
+    height: 150px;
 }
 .icon-now { 
     width: 100%;
@@ -204,6 +201,8 @@ body {
 .locations__list { 
     padding: 33px 18px 7px;
     list-style: none;
+    max-height: 322px;
+    overflow-y: auto;
 }
 .location__item {
     display: flex;
