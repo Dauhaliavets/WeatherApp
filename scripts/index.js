@@ -1,32 +1,19 @@
-const UI = {
-	FORM: {
-		form: document.querySelector('.form__search'),
-		formInput: document.querySelector('.form__search-input'),
-		formBtn: document.querySelector('.form__search-button'),
-	},
-	temperature: document.querySelectorAll('.temperature span'),
-	location: document.querySelectorAll('.location__name'),
-	iconWeather: document.querySelector('.icon-now'),
-	tabsItems: document.querySelectorAll('.tabs__item'),
-	tabsBtns: document.querySelectorAll('.tabs__btn'),
-	DETAILS: {
-		feelsLike: document.querySelector('.feels__like span'),
-		weather: document.querySelector('.weather span'),
-		sunrise: document.querySelector('.sunrise span'),
-		sunset: document.querySelector('.sunset span'),
-	},
-};
+import { UI } from './view.js';
 
-const degree = '\u00B0';
-const utilToAPI = 'metric';
 const serverUrl = 'http://api.openweathermap.org/data/2.5/weather';
 const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
-
 const serverIconUrl = 'http://openweathermap.org/img/wn/';
+const utilToAPI = 'metric';
+const degree = '\u00B0';
+const FAVORITES = [];
 
 UI.tabsBtns.forEach((btn) => {
-	btn.addEventListener('click', (e) => clickBtnTab(e));
+	btn.addEventListener('click', (event) => clickBtnTab(event));
 });
+
+UI.likeIcon.addEventListener('click', (event) => clickLikeIcon(event));
+
+UI.FORM.form.addEventListener('submit', (event) => submitForm(event));
 
 function clickBtnTab(e) {
 	const targetTab = e.target.dataset.tab;
@@ -43,15 +30,76 @@ function showSelectedItem(selector, target) {
 	});
 }
 
-function minToDigits(num) {
-	return (num < 10 ? '0' : '') + num;
+function clickLikeIcon(event) {
+	let target = event.currentTarget;
+	let cityName = target.previousElementSibling.textContent;
+
+	if (FAVORITES.includes(cityName)) {
+		target.classList.remove('active');
+		removeFavoriteCity(cityName);
+	} else {
+		target.classList.add('active');
+		addToFavoritesCity(cityName);
+	}
 }
 
-function submit(event) {
-	event.preventDefault();
+function removeFavoriteCity(cityName) {
+	if (FAVORITES.includes(cityName)) {
+		const index = FAVORITES.findIndex((item) => item === cityName);
+		FAVORITES.splice(index, 1);
 
-	const citySearch = UI.FORM.formInput.value;
-	const url = `${serverUrl}?q=${citySearch}&units=${utilToAPI}&appid=${apiKey}`;
+		renderFavoriteItems();
+	}
+}
+
+function addToFavoritesCity(cityName) {
+	if (!FAVORITES.includes(cityName)) {
+		FAVORITES.push(cityName);
+
+		renderFavoriteItems();
+	}
+}
+
+function renderFavoriteItems() {
+	UI.locationsList.innerHTML = '';
+
+	if (FAVORITES.length) {
+		FAVORITES.forEach((city) => {
+			let favoriteItem = createFavoriteItem(city);
+			UI.locationsList.append(favoriteItem);
+		});
+	}
+}
+
+function createFavoriteItem(cityName) {
+	const li = document.createElement('li');
+	li.classList.add('location__item');
+	li.innerHTML = `
+		<a class="location__link" href="#">${cityName}</a>
+		<button class="location__close">&#128473;</button>
+	`;
+
+	let locationLink = li.querySelector('.location__link');
+	let locationCloseBtn = li.querySelector('.location__close');
+
+	locationLink.addEventListener('click', () => {
+		getDataForCity(cityName);
+	});
+	locationCloseBtn.addEventListener('click', () => {
+		removeFavoriteCity(cityName);
+	});
+
+	return li;
+}
+
+function submitForm(event) {
+	event.preventDefault();
+	const searchCity = UI.FORM.formInput.value;
+	getDataForCity(searchCity);
+}
+
+function getDataForCity(city) {
+	const url = `${serverUrl}?q=${city}&units=${utilToAPI}&appid=${apiKey}`;
 
 	fetch(url)
 		.then((response) => {
@@ -61,31 +109,26 @@ function submit(event) {
 			throw new Error(`Error: status ${response.status}`);
 		})
 		.then((data) => {
-			const temp = Math.round(data.main.temp);
-			const feelsLike = Math.round(data.main.feels_like);
-			const city = data.name;
-			const weather = { ...data.weather[0] }.main;
-			const iconCode = { ...data.weather[0] }.icon;
-			const sunrise = new Date(data.sys.sunrise * 1000);
-			const sunriseHours = minToDigits(sunrise.getHours());
-			const sunriseMinutes = minToDigits(sunrise.getMinutes());
-			const sunset = new Date(data.sys.sunset * 1000);
-			const sunsetHours = minToDigits(sunset.getHours());
-			const sunsetMinutes = minToDigits(sunset.getMinutes());
-
-			const urlIcon = `${serverIconUrl}${iconCode}.png`;
-
-			UI.temperature.forEach((item) => (item.textContent = `${temp}${degree}`));
-			UI.location.forEach((item) => (item.textContent = `${city}`));
-			UI.iconWeather.src = urlIcon;
-			UI.DETAILS.feelsLike.textContent = `${feelsLike}${degree}`;
-			UI.DETAILS.weather.textContent = weather;
-			UI.DETAILS.sunrise.textContent = `${sunriseHours}:${sunriseMinutes}`;
-			UI.DETAILS.sunset.textContent = `${sunsetHours}:${sunsetMinutes}`;
+			setDataWeatherNow(data);
 		})
 		.catch((error) => {
 			console.log(error);
 		});
 }
 
-UI.FORM.form.addEventListener('submit', (event) => submit(event));
+function setDataWeatherNow(data) {
+	const temp = Math.round(data.main.temp);
+	const city = data.name;
+	const iconCode = data.weather[0].icon;
+	const urlIcon = `${serverIconUrl}${iconCode}.png`;
+
+	UI.temperature.forEach((item) => (item.textContent = `${temp}${degree}`));
+	UI.location.forEach((item) => (item.textContent = `${city}`));
+	UI.weatherIcon.src = urlIcon;
+
+	if (FAVORITES.includes(city)) {
+		UI.likeIcon.classList.add('active');
+	} else {
+		UI.likeIcon.classList.remove('active');
+	}
+}

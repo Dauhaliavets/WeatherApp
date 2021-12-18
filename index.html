@@ -11,7 +11,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="styles/index.css" />
-		<script defer src="scripts/index.js"></script>
+		<script defer src="scripts/index.js" type="module"></script>
 		<title>Weather App</title>
 	</head>
 	<body>
@@ -132,6 +132,7 @@
 							</div>
                         </div>
 					</div>
+					<!-- Tabs control -->
 					<ul class="tabs__control">
 						<li class="tabs__btn-wrapper">
 							<button class="tabs__btn active" data-tab="now">Now</button>
@@ -145,28 +146,9 @@
 					</ul>
 				</div>
 
-				<div class="added__locations">
+				<div class="favorites__locations">
 					<h3 class="locations__title">Added Locations:</h3>
-					<ul class="locations__list">
-						<li class="location__item">
-							<a class="location__link" href="#">Amur</a>
-						</li>
-						<li class="location__item">
-							<a class="location__link" href="#">Samara</a>
-						</li>
-						<li class="location__item">
-							<a class="location__link" href="#">Bali</a>
-						</li>
-						<li class="location__item">
-							<a class="location__link" href="#">Dane</a>
-						</li>
-						<li class="location__item">
-							<a class="location__link" href="#">Kilo</a>
-						</li>
-						<li class="location__item">
-							<a class="location__link" href="#">Nur-Sultan</a>
-						</li>
-					</ul>
+					<ul class="locations__list"></ul>
 				</div>
 			</div>
 		</div>

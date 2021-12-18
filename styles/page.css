@@ -103,6 +103,9 @@ body {
     height: 22px;
     cursor: pointer;
 }
+.like__icon.active svg {
+    fill: black;
+}
 /* ==== Now end   =====*/
 
 /* ====   Details start   ====== */
@@ -184,13 +187,15 @@ body {
 
 
 
-.added__locations { 
+.favorites__locations { 
     flex-basis: 50%;
 }
 .locations__title { 
     padding: 33px 18px 7px;
     border-bottom: 1px solid black;;
-
+}
+.locations__title,
+.location__item {
     font-style: normal;
     font-weight: normal;
     font-size: 24px;
@@ -201,13 +206,22 @@ body {
     list-style: none;
 }
 .location__item {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 28px;
+    display: flex;
+    justify-content: space-between;
+
     margin-bottom: 10px;
 }
 .location__link {
     color: #000;
     text-decoration: none;
+}
+.location__close {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
 }
