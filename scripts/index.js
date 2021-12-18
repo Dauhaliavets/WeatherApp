@@ -106,10 +106,11 @@ function getDataForCity(city) {
 			if (response.ok) {
 				return response.json();
 			}
-			throw new Error(`Error: status ${response.status}`);
+			throw new Error(`${response.status === 404 ? 'Not found' : response.status}`);
 		})
 		.then((data) => {
 			setDataWeatherNow(data);
+			setDataWeatherDetails(data);
 		})
 		.catch((error) => {
 			console.log(error);
@@ -131,4 +132,24 @@ function setDataWeatherNow(data) {
 	} else {
 		UI.likeIcon.classList.remove('active');
 	}
+}
+
+function setDataWeatherDetails(data) {
+	const feelsLike = Math.round(data.main.feels_like);
+	const weather = data.weather[0].main;
+	const sunrise = new Date(data.sys.sunrise * 1000);
+	const sunset = new Date(data.sys.sunset * 1000);
+	const sunriseHours = minTwoDigits(sunrise.getHours());
+	const sunriseMinutes = minTwoDigits(sunrise.getMinutes());
+	const sunsetHours = minTwoDigits(sunset.getHours());
+	const sunsetMinutes = minTwoDigits(sunset.getMinutes());
+
+	UI.DETAILS.feelsLike.textContent = `${feelsLike}${degree}`;
+	UI.DETAILS.weather.textContent = weather;
+	UI.DETAILS.sunrise.textContent = `${sunriseHours}:${sunriseMinutes}`;
+	UI.DETAILS.sunset.textContent = `${sunsetHours}:${sunsetMinutes}`;
+}
+
+function minTwoDigits(num) {
+	return (num < 10 ? '0' : '') + num;
 }
