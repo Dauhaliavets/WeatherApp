@@ -1,4 +1,6 @@
 import { UI } from './view.js';
+import { Storage } from './storage.js';
+import { initTabs } from './tabs.js';
 
 const URLS = {
 	SERVER: 'https://api.openweathermap.org/data/2.5/weather',
@@ -8,30 +10,18 @@ const API_KEY = 'f660a2fb1e4bad108d6160b7f58c555f';
 const UTIL_TO_API = 'metric';
 const DEGREE_SYMBOL = '\u00B0';
 const CROSS_SYMBOL = '&#128473;';
-const favorites = [];
 
-UI.tabsBtns.forEach((btn) => {
-	btn.addEventListener('click', clickBtnTab);
-});
+const favorites = Storage.getFavoriteCities() || [];
+const currentCity = Storage.getCurrentCity() || 'Minsk';
+
+renderFavoriteItems(favorites);
+getDataForCity(currentCity);
+
+initTabs();
 
 UI.likeIcon.addEventListener('click', clickLikeIcon);
 
 UI.FORM.form.addEventListener('submit', submitForm);
-
-function clickBtnTab(event) {
-	const targetTab = event.target.dataset.tab;
-	showSelectedItem(UI.tabsBtns, targetTab);
-	showSelectedItem(UI.tabsItems, targetTab);
-}
-
-function showSelectedItem(selector, target) {
-	selector.forEach((elem) => {
-		elem.classList.remove('active');
-		if (elem.dataset.tab === target) {
-			elem.classList.add('active');
-		}
-	});
-}
 
 function clickLikeIcon(event) {
 	let target = event.currentTarget;
@@ -49,15 +39,19 @@ function clickLikeIcon(event) {
 function removeFavoriteCity(cityName) {
 	const index = favorites.findIndex((item) => item === cityName);
 	favorites.splice(index, 1);
-	renderFavoriteItems();
+
+	Storage.setFavoriteCities(favorites);
+	renderFavoriteItems(favorites);
 }
 
 function addToFavoritesCity(cityName) {
 	favorites.push(cityName);
-	renderFavoriteItems();
+
+	Storage.setFavoriteCities(favorites);
+	renderFavoriteItems(favorites);
 }
 
-function renderFavoriteItems() {
+function renderFavoriteItems(favorites) {
 	UI.locationsList.innerHTML = '';
 
 	favorites.forEach((city) => {
@@ -78,9 +72,13 @@ function createFavoriteItem(cityName) {
 
 	locationLink.addEventListener('click', () => {
 		getDataForCity(cityName);
+		Storage.setCurrentCity(cityName);
 	});
 	locationCloseBtn.addEventListener('click', () => {
 		removeFavoriteCity(cityName);
+		if(cityName === Storage.getCurrentCity()){
+			UI.likeIcon.classList.remove('active');
+		}
 	});
 
 	return li;
@@ -105,6 +103,7 @@ function getDataForCity(city) {
 		.then((data) => {
 			setDataWeatherNow(data);
 			setDataWeatherDetails(data);
+			Storage.setCurrentCity(data.name);
 		})
 		.catch(alert);
 }
