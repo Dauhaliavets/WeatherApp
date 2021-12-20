@@ -1,22 +1,25 @@
 import { UI } from './view.js';
 
-const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
-const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f';
-const serverIconUrl = 'http://openweathermap.org/img/wn/';
-const utilToAPI = 'metric';
-const degree = '\u00B0';
-const FAVORITES = [];
+const URLS = {
+	SERVER: 'https://api.openweathermap.org/data/2.5/weather',
+	SERVER_ICON : 'http://openweathermap.org/img/wn/',
+}
+const API_KEY = 'f660a2fb1e4bad108d6160b7f58c555f';
+const UTIL_TO_API = 'metric';
+const DEGREE_SYMBOL = '\u00B0';
+const CROSS_SYMBOL = '&#128473;';
+const favorites = [];
 
 UI.tabsBtns.forEach((btn) => {
-	btn.addEventListener('click', (event) => clickBtnTab(event));
+	btn.addEventListener('click', clickBtnTab);
 });
 
-UI.likeIcon.addEventListener('click', (event) => clickLikeIcon(event));
+UI.likeIcon.addEventListener('click', clickLikeIcon);
 
-UI.FORM.form.addEventListener('submit', (event) => submitForm(event));
+UI.FORM.form.addEventListener('submit', submitForm);
 
-function clickBtnTab(e) {
-	const targetTab = e.target.dataset.tab;
+function clickBtnTab(event) {
+	const targetTab = event.target.dataset.tab;
 	showSelectedItem(UI.tabsBtns, targetTab);
 	showSelectedItem(UI.tabsItems, targetTab);
 }
@@ -34,7 +37,7 @@ function clickLikeIcon(event) {
 	let target = event.currentTarget;
 	let cityName = target.previousElementSibling.textContent;
 
-	if (FAVORITES.includes(cityName)) {
+	if (favorites.includes(cityName)) {
 		target.classList.remove('active');
 		removeFavoriteCity(cityName);
 	} else {
@@ -44,31 +47,22 @@ function clickLikeIcon(event) {
 }
 
 function removeFavoriteCity(cityName) {
-	if (FAVORITES.includes(cityName)) {
-		const index = FAVORITES.findIndex((item) => item === cityName);
-		FAVORITES.splice(index, 1);
-
-		renderFavoriteItems();
-	}
+	const index = favorites.findIndex((item) => item === cityName);
+	favorites.splice(index, 1);
+	renderFavoriteItems();
 }
 
 function addToFavoritesCity(cityName) {
-	if (!FAVORITES.includes(cityName)) {
-		FAVORITES.push(cityName);
-
-		renderFavoriteItems();
-	}
+	favorites.push(cityName);
+	renderFavoriteItems();
 }
 
 function renderFavoriteItems() {
 	UI.locationsList.innerHTML = '';
 
-	if (FAVORITES.length) {
-		FAVORITES.forEach((city) => {
-			let favoriteItem = createFavoriteItem(city);
-			UI.locationsList.append(favoriteItem);
-		});
-	}
+	favorites.forEach((city) => {
+		UI.locationsList.append(createFavoriteItem(city));
+	});
 }
 
 function createFavoriteItem(cityName) {
@@ -76,7 +70,7 @@ function createFavoriteItem(cityName) {
 	li.classList.add('location__item');
 	li.innerHTML = `
 		<a class="location__link" href="#">${cityName}</a>
-		<button class="location__close">&#128473;</button>
+		<button class="location__close">${CROSS_SYMBOL}</button>
 	`;
 
 	let locationLink = li.querySelector('.location__link');
@@ -99,7 +93,7 @@ function submitForm(event) {
 }
 
 function getDataForCity(city) {
-	const url = `${serverUrl}?q=${city}&units=${utilToAPI}&appid=${apiKey}`;
+	const url = `${URLS.SERVER}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
 
 	fetch(url)
 		.then((response) => {
@@ -112,22 +106,20 @@ function getDataForCity(city) {
 			setDataWeatherNow(data);
 			setDataWeatherDetails(data);
 		})
-		.catch((error) => {
-			alert(error);
-		});
+		.catch(alert);
 }
 
 function setDataWeatherNow(data) {
 	const temp = Math.round(data.main.temp);
 	const city = data.name;
 	const iconCode = data.weather[0].icon;
-	const urlIcon = `${serverIconUrl}${iconCode}@4x.png`;
+	const urlIcon = `${URLS.SERVER_ICON}${iconCode}@4x.png`;
 
-	UI.temperature.forEach((item) => (item.textContent = `${temp}${degree}`));
+	UI.temperature.forEach((item) => (item.textContent = `${temp}${DEGREE_SYMBOL}`));
 	UI.location.forEach((item) => (item.textContent = `${city}`));
 	UI.weatherIcon.src = urlIcon;
 
-	if (FAVORITES.includes(city)) {
+	if (favorites.includes(city)) {
 		UI.likeIcon.classList.add('active');
 	} else {
 		UI.likeIcon.classList.remove('active');
@@ -144,7 +136,7 @@ function setDataWeatherDetails(data) {
 	const sunsetHours = minTwoDigits(sunset.getHours());
 	const sunsetMinutes = minTwoDigits(sunset.getMinutes());
 
-	UI.DETAILS.feelsLike.textContent = `${feelsLike}${degree}`;
+	UI.DETAILS.feelsLike.textContent = `${feelsLike}${DEGREE_SYMBOL}`;
 	UI.DETAILS.weather.textContent = weather;
 	UI.DETAILS.sunrise.textContent = `${sunriseHours}:${sunriseMinutes}`;
 	UI.DETAILS.sunset.textContent = `${sunsetHours}:${sunsetMinutes}`;
