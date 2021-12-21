@@ -150,8 +150,13 @@ body {
 .forecast__feels_like { }
 
 .forecast__info__weather{}
-.forecast__main { }
-.forecast__icon { }
+.forecast__main { 
+    text-align: center;
+}
+.forecast__icon {
+    width: 50px;
+    height: 50px;
+}
 /* ======= Forecast end ============= */
 
 .tabs__control { 

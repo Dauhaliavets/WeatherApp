@@ -31,7 +31,7 @@
 				<div class="current__location">
 					<div class="tabs">
 						<!-- Now -->
-						<div class="tabs__item active" data-tab="now">
+						<div class="tabs__item" data-tab="now">
 							<div class="now__temperature temperature"><span>14&deg</span></div>
 							<div class="now__icon">
 								<img
@@ -74,74 +74,21 @@
 							</div>
 						</div>
 						<!-- Forecaast -->
-                        <div class="tabs__item" data-tab="forecast">
+                        <div class="tabs__item active" data-tab="forecast">
 							<p class="location__name">Aktobe</p>
-							<div class="forecast__card">
-								<div class="forecast__dateTime-wrapper">
-									<div class="forecast__date">17 May</div>
-									<div class="forecast__time">12:00</div>
-								</div>
-								<div class="forecast__info-wrapper">
-									<div class="forecast__info__temperature">
-										<div class="forecast__temperature">Temperature: <span>13&deg</span></div>
-										<div class="forecast__feels_like">Feels like: <span>10&deg</span></div>
-									</div>
-									<div class="forecast__info__weather">
-										<div class="forecast__main">Rain</div>
-										<div class="forecast__icon">
-											<img src="img/icon-rain.png" alt="rain">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="forecast__card">
-								<div class="forecast__dateTime-wrapper">
-									<div class="forecast__date">17 May</div>
-									<div class="forecast__time">15:00</div>
-								</div>
-								<div class="forecast__info-wrapper">
-									<div class="forecast__info__temperature">
-										<div class="forecast__temperature">Temperature: <span>13&deg</span></div>
-										<div class="forecast__feels_like">Feels like: <span>10&deg</span></div>
-									</div>
-									<div class="forecast__info__weather">
-										<div class="forecast__main">Rain</div>
-										<div class="forecast__icon">
-											<img src="img/icon-rain.png" alt="rain">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="forecast__card">
-								<div class="forecast__dateTime-wrapper">
-									<div class="forecast__date">17 May</div>
-									<div class="forecast__time">18:00</div>
-								</div>
-								<div class="forecast__info-wrapper">
-									<div class="forecast__info__temperature">
-										<div class="forecast__temperature">Temperature: <span>13&deg</span></div>
-										<div class="forecast__feels_like">Feels like: <span>10&deg</span></div>
-									</div>
-									<div class="forecast__info__weather">
-										<div class="forecast__main">Rain</div>
-										<div class="forecast__icon">
-											<img src="img/icon-rain.png" alt="rain">
-										</div>
-									</div>
-								</div>
-							</div>
+							<div class="forecast__cards"></div>
                         </div>
 					</div>
 					<!-- Tabs control -->
 					<ul class="tabs__control">
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn active" data-tab="now">Now</button>
+							<button class="tabs__btn" data-tab="now">Now</button>
 						</li>
 						<li class="tabs__btn-wrapper">
 							<button class="tabs__btn" data-tab="details">Details</button>
 						</li>
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn" data-tab="forecast">Forecast</button>
+							<button class="tabs__btn active" data-tab="forecast">Forecast</button>
 						</li>
 					</ul>
 				</div>

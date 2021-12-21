@@ -17,4 +17,5 @@ export const UI = {
 		sunrise: document.querySelector('.sunrise span'),
 		sunset: document.querySelector('.sunset span'),
 	},
+	FORECAST_CARDS: document.querySelector('.forecast__cards'),
 };
