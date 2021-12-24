@@ -4,16 +4,16 @@ const KEYS = {
 }
 
 export const Storage = {
-    setFavoriteCities(favoriteCities){
+    setFavoriteCities(favoriteCities) {
         localStorage.setItem(KEYS.FAVORITES, JSON.stringify(favoriteCities));
     },
-    getFavoriteCities(){
+    getFavoriteCities() {
         return JSON.parse(localStorage.getItem(KEYS.FAVORITES));
     },
-    setCurrentCity(cityName){
+    setCurrentCity(cityName) {
         localStorage.setItem(KEYS.CURRENT_CITY, JSON.stringify(cityName));
     },
-    getCurrentCity(){
+    getCurrentCity() {
         return JSON.parse(localStorage.getItem(KEYS.CURRENT_CITY));
     },
 }

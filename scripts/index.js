@@ -62,6 +62,7 @@ function renderFavoriteItems(favorites) {
 
 function createFavoriteItem(cityName) {
 	const li = document.createElement('li');
+
 	li.classList.add('location__item');
 	li.innerHTML = `
 		<a class="location__link" href="#">${cityName}</a>
@@ -85,10 +86,10 @@ function createFavoriteItem(cityName) {
 	return li;
 }
 
-function createForecastCard(forecast){
+function createForecastCard(forecast) {
 	const urlIcon = `${URLS.SERVER_ICON}${forecast.iconCode}@2x.png`;
-
 	const div = document.createElement('div');
+
 	div.className = "forecast__card";
 	div.innerHTML = `
 		<div class="forecast__dateTime-wrapper">
@@ -113,8 +114,9 @@ function createForecastCard(forecast){
 }
 
 function submitForm(event) {
-	event.preventDefault();
 	const searchCity = UI.FORM.formInput.value;
+
+	event.preventDefault();
 	getDataForCity(searchCity);
 }
 
@@ -154,8 +156,7 @@ function setDataWeatherNow(data) {
 		temp: Math.round(data.main.temp),
 		city: data.name,
 		iconCode: data.weather[0].icon,
-	}
-
+	};
 	const urlIcon = `${URLS.SERVER_ICON}${dataNow.iconCode}@4x.png`;
 
 	UI.temperature.forEach((item) => (item.textContent = `${dataNow.temp}${DEGREE_SYMBOL}`));
@@ -181,7 +182,7 @@ function setDataWeatherDetails(data) {
 			hours: minTwoDigits((new Date(data.sys.sunset * 1000)).getHours()),
 			minutes: minTwoDigits((new Date(data.sys.sunset * 1000)).getMinutes()),
 		},
-	}
+	};
 
 	UI.DETAILS.feelsLike.textContent = `${dataDetails.feelsLike}${DEGREE_SYMBOL}`;
 	UI.DETAILS.weather.textContent = dataDetails.weather;
