@@ -7,10 +7,12 @@ const URLS = {
 	SERVER_ICON : 'http://openweathermap.org/img/wn/',
 	SERVER_FORECAST: 'https://api.openweathermap.org/data/2.5/forecast'
 }
-const API_KEY = 'f660a2fb1e4bad108d6160b7f58c555f';
+const API_KEY = '6891e761757365649c5949515c45d9c2';
 const UTIL_TO_API = 'metric';
-const DEGREE_SYMBOL = '\u00B0';
-const CROSS_SYMBOL = '&#128473;';
+const SYMBOL_DEGREE = '\u00B0';
+const SYMBOL_CROSS = '&#128473;';
+const ICON_SIZE_SMALL = '2x';
+const ICON_SIZE_LARGE = '4x';
 
 const favorites = Storage.getFavoriteCities() || [];
 const currentCity = Storage.getCurrentCity() || 'Minsk';
@@ -66,7 +68,7 @@ function createFavoriteItem(cityName) {
 	li.classList.add('location__item');
 	li.innerHTML = `
 		<a class="location__link" href="#">${cityName}</a>
-		<button class="location__close">${CROSS_SYMBOL}</button>
+		<button class="location__close">${SYMBOL_CROSS}</button>
 	`;
 
 	let locationLink = li.querySelector('.location__link');
@@ -87,7 +89,7 @@ function createFavoriteItem(cityName) {
 }
 
 function createForecastCard(forecast) {
-	const urlIcon = `${URLS.SERVER_ICON}${forecast.iconCode}@2x.png`;
+	const urlIcon = `${URLS.SERVER_ICON}${forecast.iconCode}@${ICON_SIZE_SMALL}.png`;
 	const div = document.createElement('div');
 
 	div.className = "forecast__card";
@@ -98,8 +100,8 @@ function createForecastCard(forecast) {
 		</div>
 		<div class="forecast__info-wrapper">
 			<div class="forecast__info__temperature">
-				<div class="forecast__temperature">Temperature: <span>${forecast.temperature}${DEGREE_SYMBOL}</span></div>
-				<div class="forecast__feels_like">Feels like: <span>${forecast.feelsLike}${DEGREE_SYMBOL}</span></div>
+				<div class="forecast__temperature">Temperature: <span>${forecast.temperature}${SYMBOL_DEGREE}</span></div>
+				<div class="forecast__feels_like">Feels like: <span>${forecast.feelsLike}${SYMBOL_DEGREE}</span></div>
 			</div>
 			<div class="forecast__info__weather">
 				<div class="forecast__main">${forecast.weather}</div>
@@ -157,9 +159,9 @@ function setDataWeatherNow(data) {
 		city: data.name,
 		iconCode: data.weather[0].icon,
 	};
-	const urlIcon = `${URLS.SERVER_ICON}${dataNow.iconCode}@4x.png`;
+	const urlIcon = `${URLS.SERVER_ICON}${dataNow.iconCode}@${ICON_SIZE_LARGE}.png`;
 
-	UI.temperature.forEach((item) => (item.textContent = `${dataNow.temp}${DEGREE_SYMBOL}`));
+	UI.temperature.forEach((item) => (item.textContent = `${dataNow.temp}${SYMBOL_DEGREE}`));
 	UI.location.forEach((item) => (item.textContent = `${dataNow.city}`));
 	UI.weatherIcon.src = urlIcon;
 
@@ -184,7 +186,7 @@ function setDataWeatherDetails(data) {
 		},
 	};
 
-	UI.DETAILS.feelsLike.textContent = `${dataDetails.feelsLike}${DEGREE_SYMBOL}`;
+	UI.DETAILS.feelsLike.textContent = `${dataDetails.feelsLike}${SYMBOL_DEGREE}`;
 	UI.DETAILS.weather.textContent = dataDetails.weather;
 	UI.DETAILS.sunrise.textContent = `${dataDetails.sunrise.hours}:${dataDetails.sunrise.minutes}`;
 	UI.DETAILS.sunset.textContent = `${dataDetails.sunset.hours}:${dataDetails.sunset.minutes}`;
