@@ -31,17 +31,17 @@
 				<div class="current__location">
 					<div class="tabs">
 						<!-- Now -->
-						<div class="tabs__item" data-tab="now">
-							<div class="now__temperature temperature"><span>14&deg</span></div>
+						<div class="tabs__item active" data-tab="now">
+							<div class="now__temperature temperature"><span>&nbsp;</span></div>
 							<div class="now__icon">
 								<img
-									src="img/icon-cloud.png"
+									src="img/preloader.gif"
 									alt="cloud"
 									class="icon-now"
 								/>
 							</div>
 							<div class="location__wrapper">
-								<p class="location__name">Aktobe</p>
+								<p class="location__name">&nbsp;</p>
 								<div class="like__icon">
 									<svg
 										width="24"
@@ -64,7 +64,7 @@
 						</div>
 						<!-- Details -->
 						<div class="tabs__item" data-tab="details">
-							<p class="location__name">Aktobe</p>
+							<p class="location__name"></p>
 							<div class="details__location">
 								<p class="details__temperature temperature">Temperature: <span>14&deg</span></p>
 								<p class="details__feels__like feels__like">Feels like: <span>10&deg</span></p>
@@ -74,21 +74,21 @@
 							</div>
 						</div>
 						<!-- Forecaast -->
-                        <div class="tabs__item active" data-tab="forecast">
-							<p class="location__name">Aktobe</p>
+                        <div class="tabs__item" data-tab="forecast">
+							<p class="location__name"></p>
 							<div class="forecast__cards"></div>
                         </div>
 					</div>
 					<!-- Tabs control -->
 					<ul class="tabs__control">
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn" data-tab="now">Now</button>
+							<button class="tabs__btn active" data-tab="now">Now</button>
 						</li>
 						<li class="tabs__btn-wrapper">
 							<button class="tabs__btn" data-tab="details">Details</button>
 						</li>
 						<li class="tabs__btn-wrapper">
-							<button class="tabs__btn active" data-tab="forecast">Forecast</button>
+							<button class="tabs__btn" data-tab="forecast">Forecast</button>
 						</li>
 					</ul>
 				</div>

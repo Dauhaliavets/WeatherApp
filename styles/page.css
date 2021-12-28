@@ -14,7 +14,6 @@ body {
     margin: 0 auto;
     padding-top: 10px;
 }
-
 .weather__wrapper { 
     display: flex;
     justify-content: flex-start;
@@ -47,7 +46,6 @@ body {
     background-repeat: no-repeat;
     cursor: pointer;
 }
-
 .current__location { 
     flex-basis: calc(50% - 1px);
     max-height: 100%;
@@ -83,8 +81,8 @@ body {
     height: 150px;
 }
 .icon-now { 
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
 }
 .location__wrapper { 
     display: flex;
@@ -94,6 +92,7 @@ body {
 .location__name { 
     margin-top: 13px;
     margin-bottom: 7px;
+    line-height: 27px;
 }
 .like__icon { 
     width: 22px;
@@ -128,7 +127,6 @@ body {
     justify-content: space-between;
     min-height: 120px;
     margin-bottom: 10px;
-
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -138,18 +136,10 @@ body {
     display: flex;
     justify-content: space-between;
 }
-.forecast__date { }
-.forecast__time { }
-
 .forecast__info-wrapper { 
     display: flex;
     justify-content: space-between;
 }
-.forecast__info__temperature{}
-.forecast__temperature { }
-.forecast__feels_like { }
-
-.forecast__info__weather{}
 .forecast__main { 
     text-align: center;
 }
@@ -181,14 +171,10 @@ body {
     color: #fff;
     background-color: rgba(0, 0, 0, 0.473);
 }
-
 .tabs__btn.active {
     color: #fff;
     background-color: #000;
 }
-
-
-
 .favorites__locations { 
     flex-basis: 50%;
 }

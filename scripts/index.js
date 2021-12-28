@@ -18,7 +18,7 @@ const favorites = Storage.getFavoriteCities() || [];
 const currentCity = Storage.getCurrentCity() || 'Minsk';
 
 renderFavoriteItems(favorites);
-getDataForCity(currentCity);
+showAllWeather(currentCity);
 
 initTabs();
 
@@ -75,7 +75,7 @@ function createFavoriteItem(cityName) {
 	let locationCloseBtn = li.querySelector('.location__close');
 
 	locationLink.addEventListener('click', () => {
-		getDataForCity(cityName);
+		showAllWeather(cityName);
 		Storage.setCurrentCity(cityName);
 	});
 	locationCloseBtn.addEventListener('click', () => {
@@ -119,10 +119,10 @@ function submitForm(event) {
 	const searchCity = UI.FORM.formInput.value;
 
 	event.preventDefault();
-	getDataForCity(searchCity);
+	showAllWeather(searchCity);
 }
 
-function getDataForCity(city) {
+function showAllWeather(city) {
 	const url = `${URLS.SERVER}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
 	const urlForecast = `${URLS.SERVER_FORECAST}?q=${city}&units=${UTIL_TO_API}&appid=${API_KEY}`;
 
@@ -140,17 +140,21 @@ function getDataForCity(city) {
 		})
 		.catch(alert);
 
-	fetch(urlForecast)
-		.then((response) => {
-			if (response.ok) {
-				return response.json();
-			}
-			throw new Error(`${response.status === 404 ? 'Not found' : response.status}`);
-		})
-		.then((data) => {
-			setDataWeatherForecast(data);
-		})
-		.catch(alert);
+	async function getForecast(url){
+		try {
+			const response = await fetch(url);
+			if (response.ok){
+				const data = await response.json();
+				setDataWeatherForecast(data);
+				return;
+			} 
+			throw new Error(`${response.status === 404 ? 'City is not found' : response.status}`);
+		} catch (error) {
+			alert(error);
+		}
+	}
+	getForecast(urlForecast);
+
 }
 
 function setDataWeatherNow(data) {
