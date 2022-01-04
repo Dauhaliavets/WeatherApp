@@ -166,17 +166,15 @@ function showAllWeather(city) {
 }
 
 function setDataWeatherNow(data) {
-	const {
-		temp = Math.round(data.main.temp),
-		city = data.name,
-		iconCode = data.weather[0].icon,
-	} = data;
+	const getTemp = () => Math.round(data.main.temp);
+	const getCity = () => data.name;
+	const getIconCode = () => data.weather[0].icon
 
-	UI.temperature.forEach((item) => (item.textContent = `${temp}${SYMBOL_DEGREE}`));
-	UI.location.forEach((item) => (item.textContent = `${city}`));
-	UI.weatherIcon.src = getUrlIcon(iconCode, ICON_SIZE_LARGE);
+	UI.temperature.forEach((item) => (item.textContent = `${getTemp()}${SYMBOL_DEGREE}`));
+	UI.location.forEach((item) => (item.textContent = `${getCity()}`));
+	UI.weatherIcon.src = getUrlIcon(getIconCode(), ICON_SIZE_LARGE);
 
-	if (favorites.includes(city)) {
+	if (favorites.includes(getCity())) {
 		UI.likeIcon.classList.add('active');
 	} else {
 		UI.likeIcon.classList.remove('active');
