@@ -4,7 +4,8 @@ const KEYS = {
 }
 
 export const Storage = {
-    setFavoriteCities(favoriteCities) {
+    setFavoriteCities(favoriteCitiesSet) {
+        let favoriteCities = [...favoriteCitiesSet];
         localStorage.setItem(KEYS.FAVORITES, JSON.stringify(favoriteCities));
     },
     getFavoriteCities() {

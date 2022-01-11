@@ -14,10 +14,13 @@ const SYMBOL_CROSS = '&#128473;';
 const ICON_SIZE_SMALL = '2x';
 const ICON_SIZE_LARGE = '4x';
 
-const favorites = Storage.getFavoriteCities() || [];
+const favoriteCities = Storage.getFavoriteCities();
+const favorites = Object.keys(favoriteCities).length === 0 ? [] : favoriteCities;
 const currentCity = Storage.getCurrentCity() || 'Minsk';
 
-renderFavoriteItems(favorites);
+const favoritesSet = new Set(favorites);
+
+renderFavoriteItems(favoritesSet);
 showAllWeather(currentCity);
 
 initTabs();
@@ -30,7 +33,7 @@ function clickLikeIcon(event) {
 	let target = event.currentTarget;
 	let cityName = target.previousElementSibling.textContent;
 
-	if (favorites.includes(cityName)) {
+	if (favoritesSet.has(cityName)) {
 		target.classList.remove('active');
 		removeFavoriteCity(cityName);
 	} else {
@@ -40,18 +43,17 @@ function clickLikeIcon(event) {
 }
 
 function removeFavoriteCity(cityName) {
-	const index = favorites.findIndex((item) => item === cityName);
-	favorites.splice(index, 1);
+	favoritesSet.delete(cityName);
 
-	Storage.setFavoriteCities(favorites);
-	renderFavoriteItems(favorites);
+	Storage.setFavoriteCities(favoritesSet);
+	renderFavoriteItems(favoritesSet);
 }
 
 function addToFavoritesCity(cityName) {
-	favorites.push(cityName);
+	favoritesSet.add(cityName);
 
-	Storage.setFavoriteCities(favorites);
-	renderFavoriteItems(favorites);
+	Storage.setFavoriteCities(favoritesSet);
+	renderFavoriteItems(favoritesSet);
 }
 
 function renderFavoriteItems(favorites) {
